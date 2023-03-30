@@ -54,17 +54,17 @@ public class Teste {
 //			System.out.println("Variavel nula");
 //		}
 		
-		List<Equipamento> lista = equipamentoService.buscaTodos();
-		
-		if(lista.isEmpty()) {
-			
-			System.out.println("Não existem registros do tipo Equipamento");
-		}else {
-		
-		
-		lista.forEach( a ->{System.out.println(a.getNome());} );
-		}
-		
+//		List<Equipamento> lista = equipamentoService.buscaTodos();
+//		
+//		if(lista.isEmpty()) {
+//			
+//			System.out.println("Não existem registros do tipo Equipamento");
+//		}else {
+//		
+//		
+//		lista.forEach( a ->{System.out.println(a.getNome());} );
+//		}
+//		
 		
 		return "/home";
 	}

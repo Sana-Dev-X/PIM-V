@@ -15,7 +15,7 @@ public class EquipamentoService extends Services {
 	@Autowired
 	private EquipamentoRepository repo;
 
-	//Não mexer - está funcionando
+	// Não mexer - está funcionando
 	@Override
 	public void cadastrar(Object o) {
 		repo.save((Equipamento) o);
@@ -29,44 +29,60 @@ public class EquipamentoService extends Services {
 	@Override
 	public void alterar(Object o) {
 
-		/*
-		 * Equipamento e = (Equipamento)o; Optional<Equipamento> aux =
-		 * repo.findById(e.getId());
-		 * 
-		 * e = aux.get();
-		 */
-		repo.save((Equipamento) o);
+		Equipamento equipamento = (Equipamento) o;
+
+		Optional<Equipamento> resultadoDaBusca = repo.findById(equipamento.getId());
+
+		if (!resultadoDaBusca.equals(null)) {
+
+			Equipamento a = resultadoDaBusca.get();
+
+			a.setNome(equipamento.getNome());
+			a.setDescricao(equipamento.getDescricao());
+			a.setStatus(equipamento.getStatus());
+
+			if (!o.equals(null)) {
+				repo.save(a);
+			}
+		} else {
+			System.out.println("não encontrou o objeto em questão no banco");
+		}
 	}
-	
-	//Não mexer - está funcionando
+
+	// Não mexer - está funcionando
 	@Override
 	public void excluir(Object o) {
 		repo.delete((Equipamento) o);
-		}
+	}
 
-	
-	//Não mexer - está funcionando
+	// Não mexer - está funcionando
 	@Override
 	public Equipamento buscaPorId(Long id) {
 		Optional<Equipamento> o = repo.findById(id);
 
 		Equipamento resposta = null;
-		if(!o.isEmpty()) {
+		if (!o.isEmpty() || o.equals(null)) {
 			resposta = o.get();
-		}	
+			return resposta;
+		}
+
+		/*
+		 * Se não encontrar precisa chamar um método que mostra que não existe nenhum
+		 * objeto no banco com o id informado.
+		 */
+
 		return resposta;
 	}
 
-	
-	//Não mexer - está funcionando
+	// Não mexer - está funcionando
 	@Override
 	public List<Equipamento> buscaTodos() {
-		
-	 List<Equipamento> lista = repo.findAll();
-	 
-	 if (!lista.isEmpty()) {
-		 return lista;
-	 }
+
+		List<Equipamento> lista = repo.findAll();
+
+		if (!lista.isEmpty()) {
+			return lista;
+		}
 		return null;
 	}
 

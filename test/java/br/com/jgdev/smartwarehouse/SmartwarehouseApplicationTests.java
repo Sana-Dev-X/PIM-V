@@ -1,6 +1,7 @@
 package br.com.jgdev.smartwarehouse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.com.jgdev.smartwarehouse.model.Equipamento;
-import br.com.jgdev.smartwarehouse.model.Solicitante;
 import br.com.jgdev.smartwarehouse.model.StatusEquipamento;
 import br.com.jgdev.smartwarehouse.services.EquipamentoService;
 
@@ -71,5 +71,14 @@ class SmartwarehouseApplicationTests {
 	}
 	
 	
-
+	@Test
+	void alterarEquipamento() {
+		final Long id = 3l;
+		final Equipamento equipamentoAlterado = e.buscaPorId(id);
+		equipamentoAlterado.setNome("Alterado");
+		e.alterar(equipamentoAlterado);
+		assertEquals(equipamentoAlterado.getNome(), "Alterado");
+		
+	}
+	
 }
