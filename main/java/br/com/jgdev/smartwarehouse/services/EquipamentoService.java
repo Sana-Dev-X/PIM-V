@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.jgdev.smartwarehouse.model.Equipamento;
+import br.com.jgdev.smartwarehouse.model.StatusEquipamento;
 import br.com.jgdev.smartwarehouse.repository.EquipamentoRepository;
 
 @Service
@@ -18,7 +19,9 @@ public class EquipamentoService extends Services {
 	// Não mexer - está funcionando
 	@Override
 	public void cadastrar(Object o) {
-		repo.save((Equipamento) o);
+		Equipamento a = (Equipamento) o;
+		a.setStatus(StatusEquipamento.DISPONIVEL);
+		repo.save(a);
 	}
 
 	@Override
