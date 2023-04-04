@@ -10,9 +10,8 @@ import br.com.jgdev.smartwarehouse.model.Equipamento;
 public interface Acoes {
 	
 	void cadastrar(Object o);	
-	List<Object> listar();
 	void alterar(Object o);
 	void excluir(Object o);
-	public Equipamento buscaPorId(Long id);
-	public List<Equipamento> buscaTodos();
+	public Object buscaPorId(Long id);
+	public List<Object> buscaTodos();
 }

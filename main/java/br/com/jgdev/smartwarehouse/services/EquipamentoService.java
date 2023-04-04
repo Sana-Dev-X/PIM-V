@@ -1,5 +1,6 @@
 package br.com.jgdev.smartwarehouse.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,10 +25,7 @@ public class EquipamentoService extends Services {
 		repo.save(a);
 	}
 
-	@Override
-	public List<Object> listar() {
-		return null;
-	}
+
 
 	@Override
 	public void alterar(Object o) {
@@ -48,7 +46,7 @@ public class EquipamentoService extends Services {
 				repo.save(a);
 			}
 		} else {
-			System.out.println("não encontrou o objeto em questão no banco");
+			System.out.println("objeto não encontrado no banco");
 		}
 	}
 
@@ -60,7 +58,7 @@ public class EquipamentoService extends Services {
 
 	// Não mexer - está funcionando
 	@Override
-	public Equipamento buscaPorId(Long id) {
+	public Object buscaPorId(Long id) {
 		Optional<Equipamento> o = repo.findById(id);
 
 		Equipamento resposta = null;
@@ -79,10 +77,13 @@ public class EquipamentoService extends Services {
 
 	// Não mexer - está funcionando
 	@Override
-	public List<Equipamento> buscaTodos() {
+	public List<Object> buscaTodos() {
 
-		List<Equipamento> lista = repo.findAll();
+		List<Object> lista = new ArrayList<Object>();
+		List<Equipamento> x = repo.findAll();
 
+		x.forEach(a->lista.add(a));
+		
 		if (!lista.isEmpty()) {
 			return lista;
 		}

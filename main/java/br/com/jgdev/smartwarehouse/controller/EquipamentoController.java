@@ -1,5 +1,6 @@
 package br.com.jgdev.smartwarehouse.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,11 @@ public class EquipamentoController {
 	@GetMapping("/equipamento/lista-equipamento")
 	public String lista(Model model){
 		
-		List<Equipamento> lista = equipamentoService.buscaTodos();
-			
+		List<Equipamento> lista = new ArrayList();
+		List<Object> l= equipamentoService.buscaTodos();
+		
+		l.forEach(a->lista.add((Equipamento)a));
+		
 		model.addAttribute("lista", lista);
 		
 		return "equipamento/lista-equipamento";
